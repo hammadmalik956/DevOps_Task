@@ -22,7 +22,7 @@ This repository contains Terraform configurations for setting up an AWS infrastr
 
 ### Application Load Balancer (ALB)
 
-- **ALB** with specified listener configuration (80 and 443) and associated security group lets it access from anywhere. (Static htmls via nginx
+- **ALB** with specified listener configuration (80 and 443) and associated security group lets it access from anywhere. (Static htmls via nginx) Certificate address must be given in https listener.
 
 ### RDS Instance
 
@@ -50,15 +50,37 @@ This repository contains Terraform configurations for setting up an AWS infrastr
    cd Terraform
    terraform init
    terraform apply --var-file=configs/dev.tfvars
+   ```
+# Running Ansible Playbook    
+Upon successfull execution it will create "secrets.env" file outside Terraform directory. The file contains the credentials and host for mysql database along with public load balancer dns to access the static index.html served by nginx after executing the ansible playbook. secrets.env file will look like this 
+   ```sh 
+   HOST=XXX
+   DB_USERNAME=XXX
+   DB_PASSWORD=XXX
+   DB_NAME=XXX
+   DB_PORT=XXX
+   LOAD_B_DNS=XXX
+   ```
+Wait for EC2 to pass health check 2/2 before running ansible playbook. 
+To run Ansible playbook to configure ec2 made with terraform to serve static files we need to run the following commands before running the command you need to copy Ec2 host value which is in secrets.env
+   ```sh
+   cd .. 
+   cd Ansible 
+   ansible-playbook -i inventory.ini playbook_nginx_config.yml
+   ```
+ It will setup nginx in ec2 and it can be validated via copying ```LOAD_B_DNS``` in browser. I will shows ```Hello Nginx! I am Malik Hammad Hameed```
+# Running Node Js Application to interact with Infrastructure built
+ Lastly you can run the application by following these commands 
+   ```sh
+   cd ..
+   cd Application
+   npm i 
+   npm run dev  [ to run the node application ] [ apis can be triggered at http://localhost:4000/api/visitors GET req and http://localhost:4000/api/visitor POST req will take { "name": "Malik Hammad" } as      body
+   ```
+ To run test with **mocha** **chai** 
+  ```sh
+   npm run test [ 3 tests will pass ] 
+   ```
+# Remember to copy the required values from secret.env to Application/config/development.json. The host would be dns of EC2 and all other variables must also fill in. Since RDS is in Private subnet we have setup socat port forwarding so that we can use ec2's dns to forward the request to rds from ec2 while connecting to RDS mysql. 
 
-##Upon successfull execution it will create "secrets.env" file outside Terraform directory. The file contains the credentials and host for mysql database along with public load balancer dns to access the static index.html served by nginx after executing the ansible playbook. secrets.env file will look like this 
-```sh 
-HOST=XXX
-DB_USERNAME=XXX
-DB_PASSWORD=XXX
-DB_NAME=XXX
-DB_PORT=XXX
-LOAD_B_DNS=XXX
-
-
-
+## For Further Assitance in running the solution. You can fearlessly reach out to me. Thank you  
