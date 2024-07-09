@@ -12,21 +12,21 @@ This repository contains Terraform configurations for setting up an AWS infrastr
 
 ### Security Groups
 
-- **EC2 Security Group**: Allows inbound SSH (port 22) and MySQL (port 3306) traffic.
-- **ALB Security Group**: Allows inbound HTTP (port 80) and HTTPS (port 443) traffic.
-- **RDS Security Group**: Allows inbound MySQL (port 3306) traffic from the EC2 instances.
+- **EC2 Security Group**: Allows inbound SSH (port 22) and MySQL (port 3306) traffic via port forwarding with socat. 
+- **ALB Security Group**: Allows inbound HTTP (port 80) and HTTPS (port 443) traffic which is redirected to port 443 from port 80.
+- **RDS Security Group**: Allows inbound MySQL (port 3306) traffic from the EC2 instances because RDS is in Private Subnet
 
 ### EC2 Instances
 
-- **EC2 Instances** with specified AMI, instance type, and associated security group.
+- **EC2 Instances** with ubuntu jammy 22.04 AMI, instance type = t2.micro.
 
 ### Application Load Balancer (ALB)
 
-- **ALB** with specified listener configuration and associated security group.
+- **ALB** with specified listener configuration (80 and 443) and associated security group lets it access from anywhere. (Static htmls via nginx
 
 ### RDS Instance
 
-- **RDS Instance** with specified engine, version, instance class, and associated security group.
+- **RDS Instance** with mysql engine and associated security group.
 
 ### Key Pair
 
@@ -43,5 +43,22 @@ This repository contains Terraform configurations for setting up an AWS infrastr
 
 1. **Clone the Repository**:
    ```sh
-   git clone <repository-url>
+   git clone 
    cd <repository-directory>
+2. **Initialize the Repo
+   ```sh
+   cd Terraform
+   terraform init
+   terraform apply --var-file=configs/dev.tfvars
+
+##Upon successfull execution it will create "secrets.env" file outside Terraform directory. The file contains the credentials and host for mysql database along with public load balancer dns to access the static index.html served by nginx after executing the ansible playbook. secrets.env file will look like this 
+```sh 
+HOST=XXX
+DB_USERNAME=XXX
+DB_PASSWORD=XXX
+DB_NAME=XXX
+DB_PORT=XXX
+LOAD_B_DNS=XXX
+
+
+
