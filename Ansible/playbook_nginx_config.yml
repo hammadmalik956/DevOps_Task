@@ -1,0 +1,38 @@
+---
+- name: Setup Nginx and deploy a simple HTML page
+  hosts: web
+  become: true
+  tasks:
+    - name: Update apt package list
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx service
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Create an HTML file
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Hello, World!</title>
+          </head>
+          <body>
+              <h1>Hello, World! This is Malik Hammad Hameed</h1>
+          </body>
+          </html>
+
+    - name: Ensure Nginx is running
+      ansible.builtin.service:
+        name: nginx
+        state: started

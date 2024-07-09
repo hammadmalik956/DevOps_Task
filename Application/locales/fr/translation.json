@@ -1,0 +1,14 @@
+{
+    "userCreated": "L'utilisateur est enregistré avec succès",
+    "userFetched": "Détails de l'utilisateur",
+    "userDeleted": "Utilisateur supprimé avec succès",
+    "userUpdated": "Utilisateur mis à jour avec succès",
+    "usersFetched": "Liste des utilisateurs",
+    "isInvalidMongoID": "Invalid Mongoose ID",
+    "idNotFound": "ID Not Found",
+    "routeNotFound": "Route Not Found",
+    "welcome": "Welcome To API",
+    "isDuplcate": "is Duplicate",
+    "noToken": "You are not AUTHORIZE to access this information",
+    "invalidToken": "You are not AUTHORIZED. Your Token is Wrong/Expired."
+}

@@ -1,0 +1,14 @@
+{
+    "userCreated": "User Ban Gya Hai",
+    "userFetched": "User ki Tafseelat",
+    "userDeleted": "User Delete Hogya Hai",
+    "userUpdated": "User Update Kar Dia Gia Hai",
+    "usersFetched": "Users Ki Tafseelat",
+    "isInvalidMongoID": "Mongo Ki ID Ghalat Hai",
+    "idNotFound": "ID Mojood Nahi",
+    "routeNotFound": "Route Mojood Nahi",
+    "welcome": "Khushamdeed Sample Node JS ki API mey",
+    "isDuplcate": "Pheley bhi Majood Hai",
+    "noToken": "You are not AUTHORIZE to access this information",
+    "invalidToken": "You are not AUTHORIZED. Your Token is Wrong/Expired."
+}

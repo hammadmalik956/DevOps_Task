@@ -1,0 +1,16 @@
+{
+    "NAME": "Node JS API Name",
+    "PORT": 4000,
+    "JWT_SECRET_KEY": "JWT_Secret_Key",
+    "HOSTNAME": "PROD/DEV http://localhost",
+    "DATABASE": {
+        "NAME": "devopsassgnapp",
+        "URL": "ec2-35-91-254-43.us-west-2.compute.amazonaws.com",
+        "USERNAME": "devopsassgnuser",
+        "PASSWORD": "e29AzYJNqYooLHf3"
+    },
+    "STRIPE": {
+        "SECRET_KEY": "",
+        "PUBLISH_KEY": ""
+    }
+}
