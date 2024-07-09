@@ -2,6 +2,8 @@
 
 This repository contains Terraform configurations for setting up an AWS infrastructure, including VPC, EC2 instances, security groups, ALB (Application Load Balancer), and RDS (Relational Database Service).
 
+
+I have used my boilerplate Terraform modules that i use to work on daily for my clients. I was also a MERN stack developer so i used nodes js boilerplate code for building this application, there could be additional functionality that wasn't the requirement of the given task. 
 ## Resources Created
 
 ### VPC
@@ -44,9 +46,10 @@ This repository contains Terraform configurations for setting up an AWS infrastr
 1. **Clone the Repository**:
    ```sh
    git clone 
-   cd <repository-directory>
+   cd git@github.com:hammadmalik956/DevOps_Task.git
 2. **Initialize the Repo
    ```sh
+   cd DevOps_Task
    cd Terraform
    terraform init
    terraform apply --var-file=configs/dev.tfvars
